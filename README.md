@@ -1,4 +1,4 @@
-[![build status](https://secure.travis-ci.org/doug-martin/is-extended.png)](http://travis-ci.org/doug-martin/is-extended)
+[![Build Status](https://travis-ci.org/doug-martin/is-extended.png?branch=master)](undefined)
 
 # is-extended
 
