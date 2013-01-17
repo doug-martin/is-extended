@@ -416,7 +416,7 @@
             return defineIsa((require("extended")));
         });
     } else {
-        this.isa = defineIsa(this.extended);
+        this.is = defineIsa(this.extended);
     }
 
 }).call(this);
