@@ -729,7 +729,7 @@ it.describe("is-extended",function (it) {
     });
 
 
-}).as(module);
+}).as(module).run();
 
 
 

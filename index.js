@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    function defineIsa(extender) {
+    function defineIsa(extended) {
 
         var undef, pSlice = Array.prototype.slice;
 
@@ -369,7 +369,7 @@
         }
 
         function addToSwitcher(func) {
-            switcher[func] = function isaTester(val) {
+            switcher[func] = function isaTester() {
                 var args = argsToArray(arguments, 1), isFunc = isa[func], handler, doBreak = true;
                 if (args.length <= isFunc.length - 1) {
                     throw new TypeError("A handler must be defined when calling using switch");
@@ -384,7 +384,6 @@
                     throw new TypeError("handler must be defined");
                 }
                 this._cases.push(function (testArgs) {
-                    var ret;
                     if (isFunc.apply(isa, testArgs.concat(args))) {
                         return [doBreak, handler.apply(this, testArgs)];
                     }
@@ -400,24 +399,24 @@
             }
         }
 
-        var is = extender.define(isa).expose(isa);
-        is.tester = extender.define(tester);
-        is.switcher = extender.define(switcher);
+        var is = extended.define(isa).expose(isa);
+        is.tester = extended.define(tester);
+        is.switcher = extended.define(switcher);
         return is;
 
     }
 
     if ("undefined" !== typeof exports) {
         if ("undefined" !== typeof module && module.exports) {
-            module.exports = defineIsa(require("extender"));
+            module.exports = defineIsa(require("extended"));
 
         }
     } else if ("function" === typeof define) {
         define(["require"], function (require) {
-            return defineIsa((require("extender")));
+            return defineIsa((require("extended")));
         });
     } else {
-        this.isa = defineIsa(this.extender);
+        this.isa = defineIsa(this.extended);
     }
 
 }).call(this);
