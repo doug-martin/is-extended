@@ -17,7 +17,7 @@
             if (actual === expected) {
                 return true;
 
-            } else if (Buffer && Buffer.isBuffer(actual) && Buffer.isBuffer(expected)) {
+            } else if (typeof Buffer !== "undefined" && Buffer.isBuffer(actual) && Buffer.isBuffer(expected)) {
                 if (actual.length !== expected.length) {
                     return false;
                 }
