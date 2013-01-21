@@ -238,7 +238,9 @@ it.describe("is-extended",function (it) {
             ], [
                 {a: "a"}
             ]));
-            assert.isTrue(is.deepEqual(new Buffer("abc"), new Buffer("abc")));
+            if (process.title !== "browser") {
+                assert.isTrue(is.deepEqual(new Buffer("abc"), new Buffer("abc")));
+            }
             (function _deepEqual() {
                 var argsA = arguments;
                 (function __deepEqual() {
