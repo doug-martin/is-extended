@@ -172,8 +172,15 @@
             return obj !== undef && obj === null;
         }
 
-        function isArguments(object) {
+
+        var isArguments = function _isArguments(object) {
             return !isUndefinedOrNull(object) && Object.prototype.toString.call(object) === '[object Arguments]';
+        };
+
+        if (!isArguments(arguments)) {
+            isArguments = function _isArguments(obj) {
+                return !!(obj && obj.hasOwnProperty("callee"));
+            };
         }
 
 
