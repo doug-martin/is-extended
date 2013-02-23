@@ -184,6 +184,74 @@ is.notContains([1,2,3], 2); //true
 is([1,2,3]).notContains(2); //true
 ```
 
+**`containsAt`**
+
+Checks if an array contains a given value at the specified index
+
+```javascript
+is.contains([1,2,3], 2, 1); //true
+is([1,2,3]).containsAt(2, 1); //true
+```
+
+**`notContainsAt`**
+
+Checks if an array does not contain a given value at the specified index
+
+```javascript
+is.notContains([1,2,3], 2, 0); //true
+is([1,2,3]).notContains(2, 0); //true
+```
+
+**`has`**
+
+Checks if a value has the specified property.
+
+```javascript
+is.has([1,2,3], "length"); //true
+is.has({a: "a"}, "a"); //true
+is([1,2,3]).has("length"); //true
+is({a: "a"}).has("a"); //true
+```
+
+**`notHas`**
+
+Checks if an array does not contain a given value.
+
+```javascript
+is.notHas([1,2,3], "someProperty"); //true
+is.notHas({a: "a"}, "b"); //true
+is([1,2,3]).notHas("someProperty"); //true
+is({a: "a"}).notHas("b"); //true
+```
+
+**`isLength`**
+
+Checks if a value has the specified length;
+
+```javascript
+is.isLength([1,2,3], 3); //true
+is.isLength("abc", 3); //true
+is.isLength(function(a, b, c){}, 3); //true
+
+is([1,2,3]).isLength(3); //true
+is("abc").isLength(3); //true
+is(function(a, b, c){}).isLength(3); //true
+```
+
+**`isNotLength`**
+
+Checks if an value does not have the specified length.
+
+```javascript
+is.isNotLength([1,2,3], 3); //false
+is.isNotLength("abc", 3); //false
+is.isNotLength(function(a, b, c){}, 3); //false
+
+is([1,2,3]).isNotLength(3); //false
+is("abc").isNotLength(3); //false
+is(function(a, b, c){}).isNotLength(3); //false
+```
+
 
 ## Creating a custom tester.
 

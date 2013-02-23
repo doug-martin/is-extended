@@ -5,6 +5,8 @@
 
         var undef, pSlice = Array.prototype.slice;
 
+        var hasOwnProperty = Object.prototype.hasOwnProperty;
+
         function argsToArray(args, slice) {
             slice = slice || 0;
             return pSlice.call(args, slice);
@@ -294,6 +296,42 @@
             return !isIn(obj, arr);
         }
 
+        function containsAt(arr, obj, index) {
+            if (isArray(arr) && arr.length > index) {
+                return isEq(arr[index], obj);
+            }
+            return false;
+        }
+
+        function notContainsAt(arr, obj, index) {
+            if (isArray(arr)) {
+                return !isEq(arr[index], obj);
+            }
+            return false;
+        }
+
+        function has(obj, prop) {
+            return hasOwnProperty.call(obj, prop);
+        }
+
+        function notHas(obj, prop) {
+            return !has(obj, prop);
+        }
+
+        function length(obj, l) {
+            if (has(obj, "length")) {
+                return obj.length === l;
+            }
+            return false;
+        }
+
+        function notLength(obj, l) {
+            if (has(obj, "length")) {
+                return obj.length !== l;
+            }
+            return false;
+        }
+
         var isa = {
             isFunction: isFunction,
             isObject: isObject,
@@ -328,7 +366,13 @@
             isLike: isLike,
             isNotLike: isNotLike,
             contains: contains,
-            notContains: notContains
+            notContains: notContains,
+            has: has,
+            notHas: notHas,
+            isLength: length,
+            isNotLength: notLength,
+            containsAt: containsAt,
+            notContainsAt: notContainsAt
         };
 
         var tester = {

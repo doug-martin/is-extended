@@ -451,19 +451,121 @@ it.describe("is-extended",function (it) {
             assert.isTrue(is.contains(["a", "b", "c"], "a"));
         });
 
-        it.should("return false if the value is like a regexp", function () {
+        it.should("return false if the value does not contain a value", function () {
             assert.isFalse(is.contains(["a", "b", "c"], "d"));
         });
     });
 
     it.describe(".notContains", function (it) {
-        it.should("return true if the array contains the value", function () {
+        it.should("return true if the array does not contain the value", function () {
             assert.isTrue(is.notContains(["a", "b", "c"], "d"));
         });
 
-        it.should("return false if the value is like a regexp", function () {
+        it.should("return false if the array contains the value", function () {
             assert.isFalse(is.notContains(["a", "b", "c"], "a"));
         });
+    });
+
+    it.describe(".containsAt", function (it) {
+        it.should("return true if the array contains the value at the specified index", function () {
+            assert.isTrue(is.containsAt(["a", "b", "c"], "a", 0));
+            assert.isTrue(is.containsAt(["a", "b", "c"], "b", 1));
+            assert.isTrue(is.containsAt(["a", "b", "c"], "c", 2));
+        });
+
+        it.should("return false if the value does not contain a value at the specified index", function () {
+            assert.isFalse(is.containsAt(["a", "b", "c"], "a", 1));
+            assert.isFalse(is.containsAt(["a", "b", "c"], "a", 4));
+            assert.isFalse(is.containsAt("a", "a", 4));
+            assert.isFalse(is.containsAt(true, "a", 4));
+        });
+    });
+
+    it.describe(".notContainsAt", function (it) {
+        it.should("return true if the value does not contain a value at the specified index", function () {
+            assert.isTrue(is.notContainsAt(["a", "b", "c"], "a", 1));
+            assert.isTrue(is.notContainsAt(["a", "b", "c"], "a", 4));
+
+        });
+
+        it.should("return false if the array contains the value at the specified index", function () {
+            assert.isFalse(is.notContainsAt(["a", "b", "c"], "a", 0));
+            assert.isFalse(is.notContainsAt(["a", "b", "c"], "b", 1));
+            assert.isFalse(is.notContainsAt(["a", "b", "c"], "c", 2));
+            assert.isFalse(is.notContainsAt("a", "a", 4));
+            assert.isFalse(is.notContainsAt(true, "a", 4));
+        });
+    });
+
+    it.describe(".has", function (it) {
+        it.should("return true if the object has a property", function () {
+            assert.isTrue(is.has({a: "a"}, "a"));
+        });
+
+        it.should("return false if the value does not contain a property", function () {
+            assert.isFalse(is.has({a: "a"}, "b"));
+        });
+    });
+
+    it.describe(".notHas", function (it) {
+        it.should("return true if the object does not have a property", function () {
+            assert.isTrue(is.notHas({a: "a"}, "b"));
+        });
+
+        it.should("return false if the value contains a value", function () {
+            assert.isFalse(is.notHas({a: "a"}, "a"));
+        });
+    });
+
+    it.describe(".isLength", function (it) {
+        it.should("return true if the object has the specified length", function () {
+            assert.isTrue(is.isLength("abc", 3));
+            assert.isTrue(is.isLength(["a", "b", "c"], 3));
+            if (is.has(function (a, b, c) {
+            }, "length")) {
+                assert.isTrue(is.isLength(function (a, b, c) {
+                }, 3));
+            }
+        });
+
+        it.should("return false if the value does have the specified length", function () {
+            if (is.has(function (a, b, c) {
+            }, "length")) {
+                assert.isFalse(is.isLength(function (a, b, c) {
+                }, 2));
+            }
+            assert.isFalse(is.isLength("abc", 2));
+            assert.isFalse(is.isLength(["a", "b", "c"], 2));
+            assert.isFalse(is.isLength(true, 3));
+            assert.isFalse(is.isLength(new Date(), 3));
+        });
+    });
+
+    it.describe(".isNotLength", function (it) {
+
+        it.should("return true if the value does have the specified length", function () {
+            if (is.has(function (a, b, c) {
+            }, "length")) {
+                assert.isTrue(is.isNotLength(function (a, b, c) {
+                }, 2));
+            }
+            assert.isTrue(is.isNotLength("abc", 2));
+            assert.isTrue(is.isNotLength(["a", "b", "c"], 2));
+        });
+
+        it.should("return false if the object has the specified length", function () {
+            assert.isFalse(is.isNotLength("abc", 3));
+            assert.isFalse(is.isNotLength(["a", "b", "c"], 3));
+            if (is.has(function (a, b, c) {
+            }, "length")) {
+                assert.isFalse(is.isNotLength(function (a, b, c) {
+                }, 3));
+            }
+            assert.isFalse(is.isNotLength(true, 3));
+            assert.isFalse(is.isNotLength(new Date(), 3));
+        });
+
+
     });
 
     it.describe("is()", function (it) {
@@ -731,7 +833,6 @@ it.describe("is-extended",function (it) {
     });
 
 
-}).as(module).run();
-
+}).as(module);
 
 
