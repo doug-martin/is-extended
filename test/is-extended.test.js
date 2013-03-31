@@ -71,6 +71,10 @@ it.describe("is-extended",function (it) {
             assert.isFalse(is.isHash(1));
             assert.isFalse(is.isHash(false));
             assert.isFalse(is.isHash(true));
+            if (typeof window !== 'undefined') {
+              assert.isFalse(is.isHash(window));
+              assert.isFalse(is.isHash(document.createElement('div')));
+            }
         });
     });
     it.describe(".isNumber", function (it) {

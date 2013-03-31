@@ -138,7 +138,7 @@
 
         function isHash(obj) {
             var ret = isObject(obj);
-            return ret && obj.constructor === Object;
+            return ret && obj.constructor === Object && !obj.nodeType && !obj.setInterval;
         }
 
         function isEmpty(object) {
