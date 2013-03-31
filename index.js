@@ -143,13 +143,9 @@
 
         function isEmpty(object) {
             if (isObject(object)) {
-                for (var i in object) {
-                    if (object.hasOwnProperty(i)) {
-                        return false;
-                    }
-                }
-            } else if (isString(object) && object === "") {
-                return true;
+                return keys(object).length === 0;
+            } else if (isString(object) || isArray(object)) {
+                return object.length === 0;
             }
             return true;
         }

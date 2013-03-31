@@ -42,13 +42,18 @@ it.describe("is-extended",function (it) {
             assert.isTrue(is.isEmpty());
             assert.isTrue(is.isEmpty({}));
             assert.isTrue(is.isEmpty([]));
+            assert.isTrue(is.isEmpty(''));
+            assert.isFalse(is.isEmpty(arguments));
+            Object.prototype.foo = 'bar';
+            assert.isTrue(is.isEmpty({}));
+            delete Object.prototype.foo;
         });
         it.should("return false if the value is not a empty", function () {
             assert.isFalse(is.isEmpty({A: "b"}));
             assert.isFalse(is.isEmpty([
                 {A: "b"}
             ]));
-
+            assert.isFalse(is.isEmpty('foo'));
         });
     });
     it.describe(".isHash", function (it) {
