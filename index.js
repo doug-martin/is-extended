@@ -128,7 +128,7 @@
         }
 
         function isFunction(obj) {
-            return typeof obj === "function";
+            return typeof obj === "function" || Object.prototype.toString.call(obj) === '[object Function]';
         }
 
         function isObject(obj) {
@@ -484,3 +484,4 @@
     }
 
 }).call(this);
+

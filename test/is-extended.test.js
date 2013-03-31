@@ -10,6 +10,9 @@ it.describe("is-extended",function (it) {
         it.should("return true if the value is a function", function () {
             assert.isTrue(is.isFunction(function () {
             }));
+            if (typeof window !== 'undefined') {
+              assert.isTrue(is.isFunction(window.alert)); // in IE7/8, typeof alert === 'object'
+            }
         });
         it.should("return false if the value is not a function", function () {
             assert.isFalse(is.isFunction("hello"));
