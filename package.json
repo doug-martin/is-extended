@@ -30,7 +30,8 @@
     "author": "Doug Martin",
     "license": "MIT",
     "dependencies": {
-        "extended": "~0.0.3"
+        "extended": "~0.0.3",
+        "object-keys": "~0.4.0"
     },
     "devDependencies": {
         "it": "~0.2.0",
@@ -40,3 +41,4 @@
         "grunt-contrib-jshint": "~0.3.0"
     }
 }
+
