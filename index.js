@@ -198,9 +198,9 @@
             return !isUndefinedOrNull(obj) && (obj instanceof RegExp);
         }
 
-        function isArray(obj) {
+        var isArray = Array.isArray || function isArray(obj) {
             return Object.prototype.toString.call(obj) === "[object Array]";
-        }
+        };
 
         function isDate(obj) {
             return (!isUndefinedOrNull(obj) && typeof obj === "object" && obj instanceof Date);
