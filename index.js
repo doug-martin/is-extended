@@ -168,7 +168,7 @@
         }
 
         function isUndefined(obj) {
-            return obj !== null && obj === undef;
+            return typeof obj === 'undefined';
         }
 
         function isDefined(obj) {
