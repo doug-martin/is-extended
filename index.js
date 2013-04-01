@@ -180,7 +180,7 @@
         }
 
         function isNull(obj) {
-            return obj !== undef && obj === null;
+            return obj === null;
         }
 
 
