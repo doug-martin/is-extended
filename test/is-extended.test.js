@@ -1,10 +1,9 @@
-"use strict";
 var it = require("it"),
     assert = require("assert"),
     is = require("..");
 
 it.describe("is-extended",function (it) {
-
+    "use strict";
 
     it.describe(".isFunction", function (it) {
         it.should("return true if the value is a function", function () {
