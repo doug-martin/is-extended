@@ -255,6 +255,7 @@
 
         function isIn(obj, arr) {
             if (isArray(arr)) {
+                if (arr.indexOf) { return arr.indexOf(obj) > -1; }
                 for (var i = 0, l = arr.length; i < l; i++) {
                     if (isEq(obj, arr[i])) {
                         return true;
