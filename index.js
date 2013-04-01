@@ -5,7 +5,7 @@
 
         var undef, pSlice = Array.prototype.slice;
 
-        var hasOwnProperty = Object.prototype.hasOwnProperty;
+        var hasOwn = Object.prototype.hasOwnProperty;
         var toStr = Object.prototype.toString;
 
         function argsToArray(args, slice) {
@@ -190,7 +190,7 @@
 
         if (!isArguments(arguments)) {
             isArguments = function _isArguments(obj) {
-                return !!(obj && obj.hasOwnProperty("callee"));
+                return !!(obj && hasOwn.call(obj, "callee"));
             };
         }
 
@@ -321,7 +321,7 @@
         }
 
         function has(obj, prop) {
-            return hasOwnProperty.call(obj, prop);
+            return hasOwn.call(obj, prop);
         }
 
         function notHas(obj, prop) {
@@ -466,7 +466,7 @@
         }
 
         for (var i in isa) {
-            if (isa.hasOwnProperty(i)) {
+            if (hasOwn.call(isa, i)) {
                 addToSwitcher(i);
                 addToTester(i);
             }
