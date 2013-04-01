@@ -6,6 +6,7 @@
         var undef, pSlice = Array.prototype.slice;
 
         var hasOwnProperty = Object.prototype.hasOwnProperty;
+        var toStr = Object.prototype.toString;
 
         function argsToArray(args, slice) {
             slice = slice || 0;
@@ -151,7 +152,7 @@
         }
 
         function isBoolean(obj) {
-            return Object.prototype.toString.call(obj) === "[object Boolean]";
+            return toStr.call(obj) === "[object Boolean]";
         }
 
         function isUndefined(obj) {
@@ -172,7 +173,7 @@
 
 
         var isArguments = function _isArguments(object) {
-            return !isUndefinedOrNull(object) && Object.prototype.toString.call(object) === '[object Arguments]';
+            return !isUndefinedOrNull(object) && toStr.call(object) === '[object Arguments]';
         };
 
         if (!isArguments(arguments)) {
@@ -195,7 +196,7 @@
         }
 
         var isArray = Array.isArray || function isArray(obj) {
-            return Object.prototype.toString.call(obj) === "[object Array]";
+            return toStr.call(obj) === "[object Array]";
         };
 
         function isDate(obj) {
