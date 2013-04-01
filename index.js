@@ -164,7 +164,7 @@
         }
 
         function isBoolean(obj) {
-            return toStr.call(obj) === "[object Boolean]";
+            return obj === true || obj === false || toStr.call(obj) === "[object Boolean]";
         }
 
         function isUndefined(obj) {
