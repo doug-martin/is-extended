@@ -286,10 +286,9 @@
 
         function isLike(obj, reg) {
             if (isString(reg)) {
-                reg = new RegExp(reg);
-            }
-            if (isRegExp(reg)) {
-                return reg.test("" + obj);
+                return String(obj).match(reg) !== null;
+            } else if (isRegExp(reg)) {
+                return reg.test(obj);
             }
             return false;
         }
