@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/doug-martin/is-extended.png?branch=master)](undefined)
 
-[![browser support](http://ci.testling.com/doug-martin/is-extended.png)](http://ci.testling.com/doug-martin/is-extended)
+[![browser support](https://ci.testling.com/doug-martin/is-extended.png)](http://ci.testling.com/doug-martin/is-extended)
 
 # is-extended
 

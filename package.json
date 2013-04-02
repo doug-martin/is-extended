@@ -18,13 +18,14 @@
     ],
     "testling": {
         "files": "test/browserling.js",
-        "browsers": {
-            "iexplore": [6, 7, 8, 9, 10],
-            "chrome": [4, 23, "canary"],
-            "firefox": [3, 3.5, 3.6, 4, 19, "nightly"],
-            "opera": [10, 10.5, 11, 11.5, 11.6, 12, "next"],
-            "safari": ["5.0.1", 5.1, 6.0]
-        }
+        "browsers": [
+            "ie/6..latest",
+            "chrome/20..latest",
+            "firefox/14..latest",
+            "safari/latest",
+            "iphone/6",
+            "ipad/6"
+        ]
     },
     "author": "Doug Martin",
     "license": "MIT",
@@ -33,6 +34,9 @@
     },
     "devDependencies": {
         "it": "~0.2.0",
-        "grunt-it": "~0.2.0"
+        "grunt-it": "~0.3.0",
+        "grunt": "~0.4.1",
+        "grunt-contrib-uglify": "~0.2.0",
+        "grunt-contrib-jshint": "~0.3.0"
     }
 }
