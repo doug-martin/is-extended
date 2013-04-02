@@ -6,6 +6,7 @@
         var undef, pSlice = Array.prototype.slice;
 
         var hasOwnProperty = Object.prototype.hasOwnProperty;
+        var toStr = Object.prototype.toString;
 
         function argsToArray(args, slice) {
             slice = slice || 0;
@@ -128,7 +129,7 @@
         }
 
         function isFunction(obj) {
-            return typeof obj === "function";
+            return typeof obj === "function" || Object.prototype.toString.call(obj) === '[object Function]';
         }
 
         function isObject(obj) {
@@ -138,24 +139,20 @@
 
         function isHash(obj) {
             var ret = isObject(obj);
-            return ret && obj.constructor === Object;
+            return ret && obj.constructor === Object && !obj.nodeType && !obj.setInterval;
         }
 
         function isEmpty(object) {
             if (isObject(object)) {
-                for (var i in object) {
-                    if (object.hasOwnProperty(i)) {
-                        return false;
-                    }
-                }
-            } else if (isString(object) && object === "") {
-                return true;
+                return keys(object).length === 0;
+            } else if (isString(object) || isArray(object)) {
+                return object.length === 0;
             }
             return true;
         }
 
         function isBoolean(obj) {
-            return Object.prototype.toString.call(obj) === "[object Boolean]";
+            return toStr.call(obj) === "[object Boolean]";
         }
 
         function isUndefined(obj) {
@@ -176,7 +173,7 @@
 
 
         var isArguments = function _isArguments(object) {
-            return !isUndefinedOrNull(object) && Object.prototype.toString.call(object) === '[object Arguments]';
+            return !isUndefinedOrNull(object) && toStr.call(object) === '[object Arguments]';
         };
 
         if (!isArguments(arguments)) {
@@ -198,9 +195,9 @@
             return !isUndefinedOrNull(obj) && (obj instanceof RegExp);
         }
 
-        function isArray(obj) {
-            return Object.prototype.toString.call(obj) === "[object Array]";
-        }
+        var isArray = Array.isArray || function isArray(obj) {
+            return toStr.call(obj) === "[object Array]";
+        };
 
         function isDate(obj) {
             return (!isUndefinedOrNull(obj) && typeof obj === "object" && obj instanceof Date);
@@ -484,3 +481,4 @@
     }
 
 }).call(this);
+

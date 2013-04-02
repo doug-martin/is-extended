@@ -10,6 +10,9 @@ it.describe("is-extended",function (it) {
         it.should("return true if the value is a function", function () {
             assert.isTrue(is.isFunction(function () {
             }));
+            if (typeof window !== 'undefined') {
+              assert.isTrue(is.isFunction(window.alert)); // in IE7/8, typeof alert === 'object'
+            }
         });
         it.should("return false if the value is not a function", function () {
             assert.isFalse(is.isFunction("hello"));
@@ -39,13 +42,18 @@ it.describe("is-extended",function (it) {
             assert.isTrue(is.isEmpty());
             assert.isTrue(is.isEmpty({}));
             assert.isTrue(is.isEmpty([]));
+            assert.isTrue(is.isEmpty(''));
+            assert.isFalse(is.isEmpty(arguments));
+            Object.prototype.foo = 'bar';
+            assert.isTrue(is.isEmpty({}));
+            delete Object.prototype.foo;
         });
         it.should("return false if the value is not a empty", function () {
             assert.isFalse(is.isEmpty({A: "b"}));
             assert.isFalse(is.isEmpty([
                 {A: "b"}
             ]));
-
+            assert.isFalse(is.isEmpty('foo'));
         });
     });
     it.describe(".isHash", function (it) {
@@ -63,6 +71,10 @@ it.describe("is-extended",function (it) {
             assert.isFalse(is.isHash(1));
             assert.isFalse(is.isHash(false));
             assert.isFalse(is.isHash(true));
+            if (typeof window !== 'undefined') {
+              assert.isFalse(is.isHash(window));
+              assert.isFalse(is.isHash(document.createElement('div')));
+            }
         });
     });
     it.describe(".isNumber", function (it) {
