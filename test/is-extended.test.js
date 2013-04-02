@@ -43,10 +43,12 @@ it.describe("is-extended",function (it) {
             assert.isTrue(is.isEmpty({}));
             assert.isTrue(is.isEmpty([]));
             assert.isTrue(is.isEmpty(''));
-            assert.isFalse(is.isEmpty(arguments));
             Object.prototype.foo = 'bar';
             assert.isTrue(is.isEmpty({}));
             delete Object.prototype.foo;
+            (function () {
+                assert.isTrue(is.isEmpty(arguments));
+            }());
         });
         it.should("return false if the value is not a empty", function () {
             assert.isFalse(is.isEmpty({A: "b"}));
@@ -846,5 +848,4 @@ it.describe("is-extended",function (it) {
 
 
 }).as(module);
-
 
