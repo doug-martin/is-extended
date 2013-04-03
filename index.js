@@ -128,8 +128,18 @@
             return true;
         }
 
-        function isFunction(obj) {
-            return typeof obj === "function" || Object.prototype.toString.call(obj) === '[object Function]';
+
+        var isFunction = function (obj) {
+            return toStr.call(obj) === '[object Function]';
+        };
+
+        //ie hack
+        if ("undefined" !== typeof window && !isFunction(window.alert)) {
+            (function (alert) {
+                isFunction = function (obj) {
+                    return toStr.call(obj) === '[object Function]' || obj === alert;
+                };
+            }(window.alert));
         }
 
         function isObject(obj) {
@@ -175,7 +185,7 @@
 
 
         var isArguments = function _isArguments(object) {
-            return !isUndefinedOrNull(object) && toStr.call(object) === '[object Arguments]';
+            return toStr.call(object) === '[object Arguments]';
         };
 
         if (!isArguments(arguments)) {
@@ -210,7 +220,7 @@
         }
 
         function isNumber(obj) {
-            return typeof obj === 'number' || toStr.call(obj) === '[object Number]';
+            return toStr.call(obj) === '[object Number]';
         }
 
         function isTrue(obj) {

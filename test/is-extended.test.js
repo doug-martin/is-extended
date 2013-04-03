@@ -11,7 +11,7 @@ it.describe("is-extended",function (it) {
             assert.isTrue(is.isFunction(function () {
             }));
             if (typeof window !== 'undefined') {
-              assert.isTrue(is.isFunction(window.alert)); // in IE7/8, typeof alert === 'object'
+                assert.isTrue(is.isFunction(window.alert)); // in IE7/8, typeof alert === 'object'
             }
         });
         it.should("return false if the value is not a function", function () {
@@ -56,6 +56,9 @@ it.describe("is-extended",function (it) {
                 {A: "b"}
             ]));
             assert.isFalse(is.isEmpty('foo'));
+            (function () {
+                assert.isFalse(is.isEmpty(arguments));
+            }(1, 2, 3, 4, 5, 6));
         });
     });
     it.describe(".isHash", function (it) {
@@ -74,8 +77,8 @@ it.describe("is-extended",function (it) {
             assert.isFalse(is.isHash(false));
             assert.isFalse(is.isHash(true));
             if (typeof window !== 'undefined') {
-              assert.isFalse(is.isHash(window));
-              assert.isFalse(is.isHash(document.createElement('div')));
+                assert.isFalse(is.isHash(window));
+                assert.isFalse(is.isHash(document.createElement('div')));
             }
         });
     });
