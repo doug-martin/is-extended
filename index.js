@@ -45,13 +45,13 @@
 
                 // 7.2. If the expected value is a Date object, the actual value is
                 // equivalent if it is also a Date object that refers to the same time.
-            } else if (actual instanceof Date && expected instanceof Date) {
+            } else if (isDate(actual) && isDate(expected)) {
                 return actual.getTime() === expected.getTime();
 
                 // 7.3 If the expected value is a RegExp object, the actual value is
                 // equivalent if it is also a RegExp object with the same source and
                 // properties (`global`, `multiline`, `lastIndex`, `ignoreCase`).
-            } else if (actual instanceof RegExp && expected instanceof RegExp) {
+            } else if (isRegExp(actual) && isRegExp(expected)) {
                 return actual.source === expected.source &&
                     actual.global === expected.global &&
                     actual.multiline === expected.multiline &&
@@ -194,7 +194,7 @@
         }
 
         function isRegExp(obj) {
-            return !isUndefinedOrNull(obj) && (obj instanceof RegExp);
+            return toStr.call(obj) === '[object RegExp]';
         }
 
         var isArray = Array.isArray || function isArray(obj) {
@@ -202,15 +202,15 @@
         };
 
         function isDate(obj) {
-            return (!isUndefinedOrNull(obj) && typeof obj === "object" && obj instanceof Date);
+            return toStr.call(obj) === '[object Date]';
         }
 
         function isString(obj) {
-            return !isUndefinedOrNull(obj) && (typeof obj === "string" || obj instanceof String);
+            return toStr.call(obj) === '[object String]';
         }
 
         function isNumber(obj) {
-            return !isUndefinedOrNull(obj) && (typeof obj === "number" || obj instanceof Number);
+            return typeof obj === 'number' || toStr.call(obj) === '[object Number]';
         }
 
         function isTrue(obj) {
