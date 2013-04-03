@@ -143,7 +143,9 @@
         }
 
         function isEmpty(object) {
-            if (isObject(object)) {
+            if (isArguments(object)) {
+                return object.length === 0;
+            } else if (isObject(object)) {
                 return keys(object).length === 0;
             } else if (isString(object) || isArray(object)) {
                 return object.length === 0;
