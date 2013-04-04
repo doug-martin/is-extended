@@ -84,6 +84,7 @@ it.describe("is-extended",function (it) {
     });
     it.describe(".isNumber", function (it) {
         it.should("return true if the value is a number", function () {
+            assert.isTrue(is.isNumber(NaN));
             assert.isTrue(is.isNumber(1));
             assert.isTrue(is.isNumber(new Number(1)));
         });
