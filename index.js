@@ -5,7 +5,7 @@
 
         var undef, pSlice = Array.prototype.slice;
 
-        var hasOwnProperty = Object.prototype.hasOwnProperty;
+        var hasOwn = Object.prototype.hasOwnProperty;
         var toStr = Object.prototype.toString;
 
         function argsToArray(args, slice) {
@@ -164,11 +164,11 @@
         }
 
         function isBoolean(obj) {
-            return toStr.call(obj) === "[object Boolean]";
+            return obj === true || obj === false || toStr.call(obj) === "[object Boolean]";
         }
 
         function isUndefined(obj) {
-            return obj !== null && obj === undef;
+            return typeof obj === 'undefined';
         }
 
         function isDefined(obj) {
@@ -180,7 +180,7 @@
         }
 
         function isNull(obj) {
-            return obj !== undef && obj === null;
+            return obj === null;
         }
 
 
@@ -190,7 +190,7 @@
 
         if (!isArguments(arguments)) {
             isArguments = function _isArguments(obj) {
-                return !!(obj && obj.hasOwnProperty("callee"));
+                return !!(obj && hasOwn.call(obj, "callee"));
             };
         }
 
@@ -255,6 +255,7 @@
 
         function isIn(obj, arr) {
             if (isArray(arr)) {
+                if (arr.indexOf) { return arr.indexOf(obj) > -1; }
                 for (var i = 0, l = arr.length; i < l; i++) {
                     if (isEq(obj, arr[i])) {
                         return true;
@@ -286,10 +287,9 @@
 
         function isLike(obj, reg) {
             if (isString(reg)) {
-                reg = new RegExp(reg);
-            }
-            if (isRegExp(reg)) {
-                return reg.test("" + obj);
+                return String(obj).match(reg) !== null;
+            } else if (isRegExp(reg)) {
+                return reg.test(obj);
             }
             return false;
         }
@@ -321,7 +321,7 @@
         }
 
         function has(obj, prop) {
-            return hasOwnProperty.call(obj, prop);
+            return hasOwn.call(obj, prop);
         }
 
         function notHas(obj, prop) {
@@ -466,7 +466,7 @@
         }
 
         for (var i in isa) {
-            if (isa.hasOwnProperty(i)) {
+            if (hasOwn.call(isa, i)) {
                 addToSwitcher(i);
                 addToTester(i);
             }
