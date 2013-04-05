@@ -35,6 +35,8 @@ it.describe("is-extended",function (it) {
             assert.isFalse(is.isObject(1));
             assert.isFalse(is.isObject(false));
             assert.isFalse(is.isObject(true));
+            assert.isFalse(is.isObject(null));
+            assert.isFalse(is.isObject(undefined));
         });
     });
     it.describe(".isEmpty", function (it) {

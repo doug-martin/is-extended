@@ -3,7 +3,7 @@
 
     function defineIsa(extended) {
 
-        var undef, pSlice = Array.prototype.slice;
+        var pSlice = Array.prototype.slice;
 
         var hasOwn = Object.prototype.hasOwnProperty;
         var toStr = Object.prototype.toString;
@@ -16,7 +16,7 @@
         function keys(obj) {
             var ret = [];
             for (var i in obj) {
-                if (obj.hasOwnProperty(i)) {
+                if (hasOwn.call(obj, i)) {
                     ret.push(i);
                 }
             }
@@ -34,13 +34,11 @@
                 if (actual.length !== expected.length) {
                     return false;
                 }
-
                 for (var i = 0; i < actual.length; i++) {
                     if (actual[i] !== expected[i]) {
                         return false;
                     }
                 }
-
                 return true;
 
                 // 7.2. If the expected value is a Date object, the actual value is
@@ -144,7 +142,7 @@
 
         function isObject(obj) {
             var undef;
-            return obj !== null && obj !== undef && typeof obj === "object";
+            return obj !== null && typeof obj === "object";
         }
 
         function isHash(obj) {
@@ -255,7 +253,9 @@
 
         function isIn(obj, arr) {
             if (isArray(arr)) {
-                if (arr.indexOf) { return arr.indexOf(obj) > -1; }
+                if (arr.indexOf) {
+                    return arr.indexOf(obj) > -1;
+                }
                 for (var i = 0, l = arr.length; i < l; i++) {
                     if (isEq(obj, arr[i])) {
                         return true;
@@ -287,7 +287,7 @@
 
         function isLike(obj, reg) {
             if (isString(reg)) {
-                return String(obj).match(reg) !== null;
+                return ("" + obj).match(reg) !== null;
             } else if (isRegExp(reg)) {
                 return reg.test(obj);
             }
