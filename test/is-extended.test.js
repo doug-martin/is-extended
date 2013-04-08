@@ -361,6 +361,10 @@ it.describe("is-extended",function (it) {
         it.should("return true if the value is in the array", function () {
             assert.isTrue(is.isIn("a", ["a", "b", "c"]));
         });
+        it.should('work for strings', function () {
+            assert.isTrue(is.isIn('a', 'abc'));
+            assert.isFalse(is.isIn('a', 'def'));
+        });
         it.should("return false if the value is not in the array", function () {
             assert.isFalse(is.isIn("d", ["a", "b", "c"]));
             assert.isFalse(is.isIn("d", []));
