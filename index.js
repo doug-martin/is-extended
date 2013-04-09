@@ -252,10 +252,9 @@
         }
 
         function isIn(obj, arr) {
-            if (isArray(arr)) {
-                if (arr.indexOf) {
-                    return arr.indexOf(obj) > -1;
-                }
+            if ((isArray(arr) && Array.prototype.indexOf) || isString(arr)) {
+                return arr.indexOf(obj) > -1;
+            } else if (isArray(arr)) {
                 for (var i = 0, l = arr.length; i < l; i++) {
                     if (isEq(obj, arr[i])) {
                         return true;
