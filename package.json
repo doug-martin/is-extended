@@ -1,6 +1,6 @@
 {
     "name": "is-extended",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "Module for type detection",
     "main": "index.js",
     "scripts": {

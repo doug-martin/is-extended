@@ -484,8 +484,8 @@
 
         }
     } else if ("function" === typeof define) {
-        define(["require"], function (require) {
-            return defineIsa((require("extended")));
+        define(["extended"], function (extended) {
+            return defineIsa(extended);
         });
     } else {
         this.isExtended = defineIsa(this.extended);
