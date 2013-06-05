@@ -483,7 +483,7 @@
             module.exports = defineIsa(require("extended"));
 
         }
-    } else if ("function" === typeof define) {
+    } else if ("function" === typeof define && define.amd) {
         define(["extended"], function (extended) {
             return defineIsa(extended);
         });
