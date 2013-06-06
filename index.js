@@ -9,8 +9,13 @@
         var toStr = Object.prototype.toString;
 
         function argsToArray(args, slice) {
+            var i = -1, j = 0, l = args.length, ret = [];
             slice = slice || 0;
-            return pSlice.call(args, slice);
+            i += slice;
+            while (++i < l) {
+                ret[j++] = args[i];
+            }
+            return ret;
         }
 
         function keys(obj) {
